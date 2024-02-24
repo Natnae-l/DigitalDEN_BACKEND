@@ -24,6 +24,5 @@ mongoose
   )
   .catch((err) => console.log(err.message));
 
-app.post("/", (req, res, next) => {
-  res.json(req.body);
-});
+// router middlewares
+app.use("/", require("./controllers/itemController"));

@@ -10,7 +10,7 @@ const itemSchema = new Schema(
     rating: { type: Number, default: 0 },
     image: { required: true, type: String },
   },
-  { timestamps }
+  { timestamps: { createdAt: "created_at" } }
 );
 
 const itemModel = mongoose.model("Item", itemSchema);
