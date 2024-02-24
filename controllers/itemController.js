@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
     let createdItem = await Item.find();
     res.json(createdItem);
   } catch (error) {
-    console.log(error.message);
+    next(error);
   }
 });
 router.post("/", async (req, res, next) => {
@@ -16,7 +16,7 @@ router.post("/", async (req, res, next) => {
     let createdItem = await Item.create(req.body);
     res.json(createdItem);
   } catch (error) {
-    console.log(error.message);
+    next(error);
   }
 });
 

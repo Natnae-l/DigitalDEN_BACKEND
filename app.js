@@ -26,3 +26,12 @@ mongoose
 
 // router middlewares
 app.use("/", require("./controllers/itemController"));
+
+//error handler
+
+app.use((err, req, res, next) => {
+  if (err) console.log(err.message);
+  else {
+    console.log("Something error happend");
+  }
+});
