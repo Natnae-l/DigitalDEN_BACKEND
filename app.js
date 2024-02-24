@@ -14,7 +14,6 @@ app.use(express.json());
 app.use(CORS());
 
 // connect databse and start the server
-
 mongoose
   .connect(process.env.mongoDB)
   .then(() =>
