@@ -25,6 +25,6 @@ mongoose
   )
   .catch((err) => console.log(err.message));
 
-app.get("/", (req, res, next) => {
-  res.send("HI");
+app.post("/", (req, res, next) => {
+  res.json(req.body);
 });
