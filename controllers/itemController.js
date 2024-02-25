@@ -34,12 +34,13 @@ router.get("/upload", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    let createdItem = await Item.find();
+    let createdItem = await Item.find({});
     res.json(createdItem);
   } catch (error) {
     next(error);
   }
 });
+
 router.post("/", upload.single("image"), async (req, res, next) => {
   const { filename, destination } = req.file;
 
@@ -49,13 +50,13 @@ router.post("/", upload.single("image"), async (req, res, next) => {
     );
     console.log(result);
     fs.unlink(path.join(__dirname, "../" + destination + filename), (err) => {
-      if (err) console.log(err);
-      else {
-        console.log("Deleted");
-      }
+      if (err) next(err);
     });
-
-    let createdItem = await Item.create(req.body);
+    let newItem = {
+      ...req.body,
+      image: result.secure_url,
+    };
+    let createdItem = await Item.create(newItem);
     res.json(createdItem);
   } catch (error) {
     console.log(error.message);
