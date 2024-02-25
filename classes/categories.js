@@ -1,10 +1,10 @@
 const Item = require("../model/itemModel");
 
 class Category {
-  static categories = [];
+  static categories = {};
 
   // main category
-  mainCategory(items) {
+  static mainCategory(items) {
     let category = new Set();
     items.forEach((element) => {
       category.add(element.category);
@@ -18,3 +18,5 @@ class Category {
   //review
   // offer
 }
+
+module.exports = Category;
