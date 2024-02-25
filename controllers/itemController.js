@@ -4,6 +4,7 @@ const express = require("express");
 const Item = require("../model/itemModel");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
+const Category = require("../classes/categories");
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -35,7 +36,7 @@ router.get("/upload", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     let createdItem = await Item.find({});
-    let category = require("../classes/categories").mainCategory(createdItem);
+    let category = Category.mainCategory(createdItem);
 
     res.json({ createdItem, category });
   } catch (error) {
@@ -50,7 +51,7 @@ router.post("/", upload.single("image"), async (req, res, next) => {
     let result = await cloudinary.uploader.upload(
       req.file.destination + req.file.filename
     );
-    console.log(result);
+
     fs.unlink(path.join(__dirname, "../" + destination + filename), (err) => {
       if (err) next(err);
     });
