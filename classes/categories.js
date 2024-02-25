@@ -9,7 +9,7 @@ class Category {
     items.forEach((element) => {
       category.add(element.category);
     });
-    this.categories.mainCategory = Array.from(category.values());
+    this.categories.Category = Array.from(category.values());
     return this.categories;
   }
 
