@@ -36,9 +36,19 @@ router.get("/upload", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     let headPhones = await Item.find({});
+
+    res.json(headPhones);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/categories", async (req, res, next) => {
+  try {
+    let headPhones = await Item.find({});
     let category = Category.mainCategory(headPhones);
 
-    res.json({ headPhones, category });
+    res.json(category);
   } catch (error) {
     next(error);
   }
